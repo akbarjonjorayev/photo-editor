@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- links -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- mine -->
+    <script type="module" src="./js/main.js"></script>
+    <link rel="stylesheet" href="editor.css" />
+    <!-- mine -->
+    <!-- links -->
+    <title>Photo editor</title>
+  </head>
+  <body>
+    <div class="full_con edit_full_con df_ai_ce list_h">
+      <div class="main_con menu_con list_v">
+        <div class="menu_con_item">
+          <div class="main_menu menu_item list_v">
+            <div class="menu_title list_h df_ai_ce">
+              <!-- <div class="menu_title_btn">&lt;</div> -->
+              <div class="title">Main</div>
+            </div>
+            <div class="menu_el list_v">
+              <div
+                class="menu_btn list_h df_jc_sb"
+                show="shape_menu_item"
+                showHideEl
+              >
+                <div class="list_h">
+                  <div>Shapes</div>
+                </div>
+                <div>></div>
+              </div>
+              <div
+                class="menu_btn list_h df_jc_sb menu_item_btn"
+                show="rotate_menu_item"
+              >
+                <div class="list_h">
+                  <div>Rotate</div>
+                </div>
+                <div>></div>
+              </div>
+              <div
+                class="menu_btn list_h df_jc_sb menu_bg_btn"
+                show="background_menu_item"
+              >
+                <div class="list_h">
+                  <div>Background</div>
+                </div>
+                <div>></div>
+              </div>
+              <div
+                class="menu_btn list_h df_jc_sb menu_item_btn"
+                show="text_menu_item"
+                showHideEl
+              >
+                <div class="list_h">
+                  <div>Text</div>
+                </div>
+                <div>></div>
+              </div>
+              <div
+                class="menu_btn list_h df_jc_sb"
+                show="search_menu_item"
+                showHideEl
+              >
+                <div class="list_h">
+                  <div>Serach photo</div>
+                </div>
+                <div>></div>
+              </div>
+              <!-- <div
+                class="menu_btn list_h df_jc_sb menu_item_btn"
+                show="shape_menu_item"
+              >
+                <div class="list_h">
+                  <div>Element's data</div>
+                </div>
+                <div>></div>
+              </div> -->
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v shape_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Shapes</div>
+            </div>
+            <div
+              class="menu_el list_v df_fw_w df_fd_r df_jc_sa shape_area scroll_v"
+            ></div>
+          </div>
+          <div class="shape_menu menu_item list_v rotate_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Rotate</div>
+            </div>
+            <div class="menu_el list_v df_ai_ce scroll_v">
+              <div class="list_h df_jc_sb coord_axes">
+                <div class="menu_btn df_ai_jc_ce active">X</div>
+                <div class="menu_btn df_ai_jc_ce">Y</div>
+                <div class="menu_btn df_ai_jc_ce">Z</div>
+              </div>
+              <div class="gray_item list_v df_ai_jc_ce">
+                <div class="list_h df_ai_jc_ce">
+                  <div class="btn axe_btn">-</div>
+                  <div class="coord_axes_val">0</div>
+                  <div class="btn axe_btn">+</div>
+                </div>
+                <input
+                  type="range"
+                  class="rotate_input"
+                  min="-180"
+                  max="180"
+                  value="0"
+                />
+              </div>
+              <div class="btn btn_max_w rotate_default_btn">Default</div>
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v background_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Background</div>
+            </div>
+            <div class="menu_el list_v scroll_v">
+              <div class="gray_item list_v df_ai_jc_ce">
+                <div class="color_txt">Background color</div>
+                <div class="w_100">
+                  <input
+                    type="color"
+                    class="color_input"
+                    purpose="background"
+                  />
+                </div>
+                <div class="btn bg_transparent_btn">Transparent</div>
+              </div>
+              <div class="list_v recent_colors_area hide">
+                <div>Recent colors</div>
+                <div
+                  class="recent_colors df_ai_ce df_jc_sb w_100"
+                  purpose="background"
+                >
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v text_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Text</div>
+            </div>
+            <div class="menu_el list_v scroll_v">
+              <div
+                class="menu_btn list_h df_jc_sb menu_item_btn"
+                show="text_style_menu_item"
+                showHideEl
+              >
+                <div class="list_h">
+                  <div>Text style</div>
+                </div>
+                <div>></div>
+              </div>
+              <div
+                class="menu_btn list_h df_jc_sb menu_item_btn"
+                show="text_edit_menu_item"
+                showHideEl
+              >
+                <div class="list_h">
+                  <div>Edit text</div>
+                </div>
+                <div>></div>
+              </div>
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v text_style_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Text style</div>
+            </div>
+            <div class="menu_el list_v scroll_v">
+              <div class="gray_item list_v text_style_btns">
+                <div class="list_h df_ai_jc_ce">
+                  <div class="btn" style="text-align: left">Left</div>
+                  <div class="btn" style="text-align: center">Center</div>
+                  <div class="btn" style="text-align: right">Right</div>
+                </div>
+                <div class="list_h df_ai_jc_ce">
+                  <div class="btn" style="font-weight: bold">B</div>
+                  <div class="btn" style="font-style: italic">I</div>
+                  <div class="btn" style="text-decoration: underline">U</div>
+                  <div class="btn" style="text-decoration: line-through">S</div>
+                </div>
+              </div>
+              <div class="gray_item list_v df_ai_jc_ce">
+                <div class="color_txt">Font size</div>
+                <div class="fz_val">16</div>
+                <input
+                  type="range"
+                  class="fz_input"
+                  min="10"
+                  max="30"
+                  value="16"
+                />
+              </div>
+              <div class="gray_item list_v df_ai_jc_ce">
+                <div class="color_txt">Text color</div>
+                <input type="color" class="color_input" purpose="text" />
+              </div>
+              <div class="list_v recent_colors_area hide">
+                <div>Recent colors</div>
+                <div
+                  class="recent_colors df_ai_ce df_jc_sb w_100"
+                  purpose="text"
+                >
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v text_edit_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Edit text</div>
+            </div>
+            <div class="menu_el list_v scroll_v">
+              <textarea class="menu_txtarea scroll_v"></textarea>
+            </div>
+          </div>
+          <div class="shape_menu menu_item list_v search_menu_item hide">
+            <div class="menu_title list_h df_ai_ce">
+              <div class="menu_title_btn">&lt;</div>
+              <div class="title">Search</div>
+            </div>
+            <div class="menu_el list_v">
+              <div class="list_h">
+                <div class="w_100">
+                  <input
+                    type="text"
+                    class="photo_search_input"
+                    placeholder="Search"
+                  />
+                </div>
+                <div class="btn photo_search_btn">Search</div>
+              </div>
+              <div class="search_photo_area scroll_v child_w_50 df_fw_w"></div>
+            </div>
+          </div>
+        </div>
+        <!-- ---------------------------------------------------------------------------------------------------------- -->
+        <div class="menu_con_item">
+          <div class="list_v">
+            <div class="upload_btn upload_btn_file list_h df_ai_jc_ce w_100">
+              <div class="upload_icon df_ai_jc_ce icon">Plus</div>
+              <div class="color_txt">Add photo</div>
+            </div>
+            <div class="upload_btn edit_add_btn_text list_h df_ai_jc_ce w_100">
+              <div class="upload_icon df_ai_jc_ce icon">Text</div>
+              <div class="color_txt">Add text</div>
+            </div>
+            <div class="upload_btn upload_btn_camera list_h df_ai_jc_ce w_100">
+              <div class="upload_icon df_ai_jc_ce icon">Camera</div>
+              <div class="color_txt">Take photo</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu_con_item fz_small df_ai_ce">
+          <div class="cursor_pos">0 x 0</div>
+        </div>
+      </div>
+      <div class="main_con edit_con">
+        <div class="edit_item">
+          <div class="edit_el edit_el_background"></div>
+          <div class="edit_el hide">
+            <div class="edit_photo_blur">
+              <img src="" />
+              <div class="win_blur"></div>
+            </div>
+          </div>
+          <div class="edit_el edit_el_wallpaper hide"></div>
+          <div class="edit_el edit_area">
+            <div class="edit_el edit_el_moving"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="full_con context_menu_con edit_moving_menu_con hide">
+      <div class="context_menu_win win"></div>
+      <div class="context_menu_item edit_moving_menu_item list_v">
+        <div
+          class="upload_btn_file upload_btn_file_new list_h_big df_jc_sb"
+          purpose="img"
+        >
+          Change photo
+        </div>
+        <div class="set_as_wallpaper_btn list_h_big df_jc_sb" purpose="img">
+          <div>Set as wallpaper</div>
+          <div class="mono_txt">Alt+W</div>
+        </div>
+        <div class="fill_btn list_h_big df_jc_sb" purpose="img">
+          <div>Fill</div>
+          <div class="mono_txt">Alt+F</div>
+        </div>
+        <div class="death" purpose="img">Edit</div>
+        <div
+          purpose="textarea"
+          show="text_menu_item,text_edit_menu_item"
+          showHideEl
+        >
+          Edit text
+        </div>
+        <div class="delete_btn red_txt list_h_big df_jc_sb" purpose="all">
+          <div>Delete</div>
+          <div class="mono_txt">Alt+X</div>
+        </div>
+      </div>
+    </div>
+    <div class="full_con context_menu_con wallpaper_menu_con hide">
+      <div class="context_menu_win win"></div>
+      <div class="context_menu_item wallpaper_menu_item list_v">
+        <div class="remove_as_wallpaper_btn list_h_big df_jc_sb">
+          <div>Remove as wallpaper</div>
+          <!-- <div class="mono_txt">Alt+W+X</div> -->
+        </div>
+        <div class="fill_btn list_h_big df_jc_sb">
+          <div>Fill</div>
+          <div class="mono_txt">Alt+F</div>
+        </div>
+        <!-- <div class="blur_btn">Blur</div> -->
+      </div>
+    </div>
+    <div class="full_con msg_full_con">
+      <div class="msg df_ai_jc_ce">
+        <div class="msg_txt"></div>
+      </div>
+    </div>
+    <div class="full_con choose_full_con df_ai_jc_ce hide">
+      <div class="list_h">
+        <div class="choose_item list_v df_jc_sb upload_btn_file">
+          <div class="choose_item_icon df_ai_jc_ce"></div>
+          <div class="color_txt">Upload photo</div>
+        </div>
+        <div class="choose_item list_v df_jc_sb">
+          <div class="choose_item_icon df_ai_jc_ce"></div>
+          <div class="color_txt">Take photo</div>
+        </div>
+        <div class="choose_item list_v df_jc_sb">
+          <div class="choose_item_icon df_ai_jc_ce"></div>
+          <div class="color_txt">New</div>
+        </div>
+      </div>
+    </div>
+    <input
+      type="file"
+      class="upload_input"
+      style="display: none"
+      accept="image/*"
+    />
+  </body>
+</html>
