@@ -25,12 +25,12 @@ function hideEl(el, className = 'hide') {
 
 function showEl(el, className = 'hide') {
   if (el.classList.contains(className)) el.classList.remove(className)
-  focusToTexts(el)
+  // focusToTexts(el)
 }
 
 function toggleEl(el) {
   el.classList.toggle('active')
-  focusToTexts(el)
+  // focusToTexts(el)
 }
 
 function fullHideEl(el, className = 'full_hide') {
@@ -39,26 +39,26 @@ function fullHideEl(el, className = 'full_hide') {
 
 function fullShowEl(el, className = 'full_hide') {
   if (el.classList.contains(className)) el.classList.remove(className)
-  focusToTexts(el)
+  // focusToTexts(el)
 }
 
-function focusToTexts(el) {
-  const input = el.querySelector('input') || false
-  const txtarea = el.querySelector('textarea') || false
+// function focusToTexts(el) {
+//   const input = el.querySelector('input') || false
+//   const txtarea = el.querySelector('textarea') || false
 
-  if (input) {
-    el.ontransitionend = () => {
-      input.focus()
-    }
-    return
-  }
-  if (txtarea) {
-    el.ontransitionend = () => {
-      txtarea.focus()
-    }
-    return
-  }
-}
+//   if (input) {
+//     el.ontransitionend = () => {
+//       input.focus()
+//     }
+//     return
+//   }
+//   if (txtarea) {
+//     el.ontransitionend = () => {
+//       txtarea.focus()
+//     }
+//     return
+//   }
+// }
 
 export {
   hide,

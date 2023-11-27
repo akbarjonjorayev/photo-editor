@@ -42,7 +42,7 @@ function checkFillBtn(img, fillBtn) {
 
 function checkBtns(menu, con) {
   const editEl = document.querySelector('.edit_moving.active')
-  const el = editEl.querySelector('.edit_moving_item').children[0]
+  const el = editEl.querySelector('.edit_moving_item').children[1]
   const elName = Get.text(el.tagName).lowerCase
 
   const btns = con.querySelector('.context_menu_item').children

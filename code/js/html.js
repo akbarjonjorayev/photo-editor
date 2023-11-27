@@ -23,7 +23,8 @@ function editMoving(option, val, { width, height }) {
 
   if (option == 'photo') {
     const html = `<div class="edit_moving_item" data-rotate='{"x":0,"y":0,"z":0}'>
-                      <img src="${val.url}" class="${val.sizeClass}" data-size-class="${val.sizeClass}" />
+                    <div class="edit_moving_bg_color"></div>
+                    <img src="${val.url}" class="${val.sizeClass}" data-size-class="${val.sizeClass}" />
                   </div>`
     const r = GetEl.editMoving(html, { width, height }).trim()
     result.push(r)
@@ -31,16 +32,18 @@ function editMoving(option, val, { width, height }) {
 
   if (option == 'shape') {
     const html = `<div class="edit_moving_item" data-rotate='{"x":0,"y":0,"z":0}'>
+                    <div class="edit_moving_bg_color"></div>
                     <div class="shape" style="${val}"></div>
-                    </div>`
+                  </div>`
     const r = GetEl.editMoving(html, { width, height }).trim()
     result.push(r)
   }
 
   if (option == 'text') {
     const html = `<div class="edit_moving_item" data-rotate='{"x":0,"y":0,"z":0}'>
-    ${val}
-    </div>`
+                    <div class="edit_moving_bg_color" style="background-color="#fff0""></div>
+                    ${val}
+                  </div>`
     const r = GetEl.editMoving(html, { width, height }).trim()
     result.push(r)
   }

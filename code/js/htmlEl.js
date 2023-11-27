@@ -15,7 +15,6 @@ function shapes(data, mainStyle) {
 function editMoving(html, { width, height }) {
   const result = `
         <div class="edit_moving" style="width: ${width}px; height: ${height}px">
-            <div class="edit_moving_bg_color"></div>
             ${html}
             <div class="edit_moving_els">
             <div class="edit_moving_bg"></div>

@@ -243,6 +243,12 @@ body {
   height: 100%;
 }
 
+.edit_moving_bg_color {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .edit_moving {
   position: absolute;
   width: 250px;
@@ -621,8 +627,7 @@ textarea {
   resize: none;
   width: 100%;
   height: 100%;
-  background-color: #000;
-  color: #fff;
+  color: #000;
 }
 
 .edit_moving.active textarea {
