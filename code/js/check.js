@@ -108,18 +108,61 @@ function menuArea() {
 const rotateMenu = document.querySelector('.rotate_menu_item')
 const coordAxes = document.querySelectorAll('.coord_axes > div')
 const axeVal = document.querySelector('.coord_axes_val')
-const rInput = document.querySelector('.range_input')
+const rInput = document.querySelector('.rotate_input')
 
 function rotateChilds(el) {
   if (rotateMenu.classList.contains('hide')) return
-  for (let i = 0; i < coordAxes.length; i++) {
-    coordAxes[i].classList.remove('active')
-  }
-  coordAxes[0].classList.add('active')
+  const axeBtn = coordAxes[0].parentElement.querySelector('.active')
+  const axe = Get.text(axeBtn.innerText).lowerCase
 
   const rStyle = Get.atttribute(el, 'data-rotate').parse
 
-  rInput.value = axeVal.innerText = rStyle.x
+  for (let i = 0; i < coordAxes.length; i++) {
+    if (coordAxes[i] != axeBtn) {
+      coordAxes[i].classList.remove('active')
+    }
+  }
+
+  rInput.value = axeVal.innerText = rStyle[axe]
+}
+
+const bgMenuItem = document.querySelector('.background_menu_item')
+const colorInput = document.querySelector('.color_input')
+const opaVal = document.querySelector('.opa_val')
+const opacityInput = document.querySelector('.opacity_input')
+const blurVal = document.querySelector('.blur_val')
+const blurInput = document.querySelector('.blur_input')
+
+const maxVal = +document.querySelector('.blur_input').getAttribute('max')
+function backgroundChilds() {
+  if (bgMenuItem.classList.contains('hide')) return
+
+  const editEl = document.querySelector(
+    '.edit_moving.active .edit_moving_bg_color'
+  )
+
+  const { property, value } = Get.CSSProperties(editEl.style.cssText)
+
+  if (property.length == 0) {
+    colorInput.value = '#000'
+    opacityInput.value = opaVal.innerText = 100
+    blurInput.value = blurVal.innerText = 0
+    return
+  }
+  for (let i = 0; i < property.length; i++) {
+    if (property[i] == 'background-color') {
+      colorInput.value = value[i]
+    }
+    if (property[i] == 'opacity') {
+      opacityInput.value = opaVal.innerText = Get.number(100 * +value[i]).fixed
+    }
+    if (property[i] == 'backdrop-filter') {
+      const blur = Get.allNumbers(value[i])[0]
+
+      blurVal.innerText = Get.percent(blur, maxVal).raw
+      blurInput.value = blur
+    }
+  }
 }
 
 const txtStyleBtns = document.querySelectorAll('.text_style_btns .btn')
@@ -139,4 +182,4 @@ function textBtns() {
   }
 }
 
-export { contextMenus, menuArea, rotateChilds, textBtns }
+export { contextMenus, menuArea, rotateChilds, backgroundChilds, textBtns }

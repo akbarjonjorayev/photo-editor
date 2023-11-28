@@ -25,7 +25,7 @@ window.onload = () => {
   Loaded.loaded()
   allApp()
 
-  Msg.show('success', 'Page has loaded successfuly')
+  Msg.show('Page has loaded successfuly', 'success')
 }
 
 const showHideEls = document.querySelectorAll('[showHideEl]')
@@ -257,6 +257,16 @@ for (let i = 0; i < colorInputs.length; i++) {
   }
 }
 
+const opacityInput = document.querySelector('.opacity_input')
+opacityInput.oninput = () => {
+  Menu.changeOpacity(opacityInput.value)
+}
+
+const blurInput = document.querySelector('.blur_input')
+blurInput.oninput = () => {
+  Menu.changeBlur(blurInput.value)
+}
+
 const recentCs = document.querySelectorAll('.recent_colors > div')
 for (let i = 0; i < recentCs.length; i++) {
   recentCs[i].onclick = () => {
@@ -331,6 +341,11 @@ searchBtn.onclick = async () => {
   allApp()
 }
 
+const dloadBtn = document.querySelector('.download_btn')
+dloadBtn.onclick = () => {
+  Menu.download()
+}
+
 function allApp() {
   const editMoveEls = document.querySelectorAll('.edit_moving_bg')
   const moveTxts = document.querySelectorAll('.edit_con textarea')
@@ -353,6 +368,7 @@ function allApp() {
 
       editEls[i].classList.add('active')
       Check.rotateChilds(editEls[i].querySelector('.edit_moving_item'))
+      Check.backgroundChilds()
       EditArea.txtareaCheck()
     }
     editEls[i].oncontextmenu = () => {
@@ -370,6 +386,8 @@ function allApp() {
       }
 
       editEls[i].classList.add('active')
+      Check.rotateChilds(editEls[i].querySelector('.edit_moving_item'))
+      Check.backgroundChilds()
       EditArea.txtareaCheck()
     }
   }
@@ -500,9 +518,11 @@ function allApp() {
         allApp()
       }
       if (editEl) {
-        const el = editEl.querySelector('.edit_moving_item')
-        if (el) {
-          Elements.setStyle(el.children[0], style, ['background-color'])
+        const els = editEl.querySelector('.edit_moving_item').children
+        if (els.length > 0) {
+          for (let i = 0; i < els.length; i++) {
+            Elements.setStyle(els[i], style, ['background-color'])
+          }
         }
       }
     }

@@ -2,6 +2,7 @@ import * as Data from './data.js'
 import * as ShowWHide from './showHide.js'
 import * as Get from './get.js'
 import * as Elements from './elements.js'
+import * as Msg from './msg.js'
 
 const appData = Data.getData()
 
@@ -53,6 +54,34 @@ function changeColor(color, purpose) {
   }
 }
 
+const opaVal = document.querySelector('.opa_val')
+function changeOpacity(val) {
+  const editEl = document.querySelector(
+    '.edit_moving.active .edit_moving_bg_color'
+  )
+
+  if (editEl) {
+    editEl.style.opacity = `${val}%`
+  }
+  if (!editEl) {
+    editElBg.style.opacity = `${val}%`
+  }
+  opaVal.innerText = val
+}
+
+const blurVal = document.querySelector('.blur_val')
+const maxVal = +document.querySelector('.blur_input').getAttribute('max')
+function changeBlur(val) {
+  const editEl = document.querySelector(
+    '.edit_moving.active .edit_moving_bg_color'
+  )
+
+  if (editEl) {
+    editEl.style.backdropFilter = `blur(${val}px)`
+  }
+  blurVal.innerText = Get.percent(val, maxVal).raw
+}
+
 const fzVal = document.querySelector('.fz_val')
 function changeFz(fz) {
   const editEl = document.querySelector('.edit_moving.active textarea')
@@ -71,4 +100,45 @@ async function searchPhoto() {
 
   return res
 }
-export { recetColors, changeColor, changeFz, searchPhoto }
+
+const editItem = document.querySelector('.edit_item')
+async function download() {
+  const editEls = document.querySelectorAll('.edit_moving.active')
+  for (let i = 0; i < editEls.length; i++) {
+    editEls[i].classList.remove('active')
+  }
+
+  html2canvas(editItem, {
+    allowTaint: true,
+    useCORS: true,
+  })
+    .then(function (canvas) {
+      // It will return a canvas element
+      let image = canvas.toDataURL('image/png', 0.5)
+
+      const link = document.createElement('a')
+      link.href = image
+      link.download = 'photo-editor.png'
+      link.click()
+    })
+    .catch((e) => {
+      // Handle errors
+      console.log(e)
+    })
+
+  for (let i = 0; i < editEls.length; i++) {
+    editEls[i].classList.add('active')
+  }
+
+  Msg.show('Content downloaded', 'success')
+}
+
+export {
+  recetColors,
+  changeColor,
+  changeOpacity,
+  changeBlur,
+  changeFz,
+  searchPhoto,
+  download,
+}

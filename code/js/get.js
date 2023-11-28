@@ -30,8 +30,20 @@ function percent(num1, num2) {
   return {
     txt: `${result}%`,
     raw: result,
-    fixed: result.toFixed(),
+    fixed: number(result).fixed,
   }
+}
+
+function number(num, fixNum = 0) {
+  return {
+    originalNum: num,
+    fixed: num.toFixed(fixNum),
+  }
+}
+
+function allNumbers(txt) {
+  const matches = txt.match(/\d+/g)
+  return matches ? matches.map(Number) : []
 }
 
 function CSSProperties(cssString) {
@@ -54,4 +66,4 @@ function CSSProperties(cssString) {
   return { property, value }
 }
 
-export { atttribute, text, percent, CSSProperties }
+export { atttribute, text, percent, number, allNumbers, CSSProperties }

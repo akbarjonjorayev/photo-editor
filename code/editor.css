@@ -285,6 +285,9 @@ body {
 .edit_moving_item,
 .edit_moving_item * {
   transition: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .edit_moving_lines,
@@ -637,6 +640,10 @@ textarea {
 
 .edit_moving textarea {
   overflow: hidden;
+}
+
+.edit_moving .shape {
+  background-color: transparent !important;
 }
 
 .menu_txtarea {
