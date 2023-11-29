@@ -12,6 +12,7 @@ import * as Move from './move.js'
 import * as Menu from './menu.js'
 import * as Msg from './msg.js'
 import * as EditArea from './editArea.js'
+import * as Screenshot from './screenshot.js'
 
 const appData = Data.getData()
 
@@ -287,7 +288,8 @@ fzInput.oninput = () => {
   Menu.changeFz(fzInput.value)
 }
 
-document.onkeydown = (e) => {
+const searchInput = document.querySelector('.photo_search_input')
+document.onkeydown = async (e) => {
   const { key } = e
 
   if (e.altKey && key == 'x') {
@@ -308,6 +310,16 @@ document.onkeydown = (e) => {
   if (e.altKey && key == 'f') {
     e.preventDefault()
     ContextFuncs.fill()
+  }
+
+  if (key == 'Enter') {
+    if (document.activeElement == searchInput) {
+      const APIRes = await Menu.searchPhoto()
+      const photos = APIRes.hits
+
+      HTML.searchPhoto(photos)
+      allApp()
+    }
   }
 }
 
@@ -346,12 +358,12 @@ const editItem = document.querySelector('.edit_item')
 const dloadBtn = document.querySelector('.download_btn')
 dloadBtn.onclick = async () => {
   const editEls = document.querySelectorAll('.edit_moving.active')
-  Menu.prepareToScreenshot(false, editEls)
+  Screenshot.prepareTo(false, editEls)
 
-  const screenURL = await Get.screenshot(editItem, { bg: '#ffffff' })
-  Elements.takeScreen(screenURL)
+  const screenURL = await Screenshot.getUrl(editItem, { bg: '#ffffff' })
+  Screenshot.takeScreen(screenURL)
 
-  Menu.prepareToScreenshot(true, editEls)
+  Screenshot.prepareTo(true, editEls)
 }
 
 function allApp() {

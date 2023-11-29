@@ -111,7 +111,7 @@ body {
   background-color: var(--main-color-dark);
   border: var(--border);
   border-radius: var(--border-ra-small);
-  padding: var(--padding-small-very) var(--padding-small);
+  padding: var(--padding-small-very);
 }
 
 .menu_btn:hover,
@@ -710,6 +710,11 @@ textarea {
   height: var(--shape-size);
 }
 
+.material-symbols-outlined {
+  font-size: var(--icon-fz-size);
+  display: flex;
+}
+
 /* lists */
 .list_v,
 .list_v_big {
@@ -785,6 +790,7 @@ textarea {
   --menu-con-size: 350px;
   --upload-btn-size: 30px;
   --big-icon-size: 50px;
+  --icon-fz-size: 20px;
   --choose-btn-size: 160px;
   --edit-moving-line-size: 5px;
   --edit-moving-point-size: 15px;

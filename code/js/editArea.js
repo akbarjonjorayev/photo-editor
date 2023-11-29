@@ -30,6 +30,15 @@ function elsTxtBtnsCheck(el) {
   const cStyle = txtarea.style.cssText
   const { property, value } = Get.CSSProperties(cStyle)
 
+  if (property.length == 0) {
+    for (let i = 0; i < txtStyleBtns.length; i++) {
+      ShowHide.hideEl(txtStyleBtns[i], 'active')
+    }
+    
+    fzInput.value = fzVal.innerText = 16
+    colorInput.value = '#000'
+  }
+
   for (let i = 0; i < txtStyleBtns.length; i++) {
     const { cssText } = txtStyleBtns[i].style
     const { property: btnProperty, value: btnValue } =

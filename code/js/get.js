@@ -68,14 +68,6 @@ function CSSProperties(cssString) {
   return { property, value }
 }
 
-async function screenshot(el, { bg }) {
-  Msg.show('Screenshot is being prepared', 'warning')
-  const canvas = await html2canvas(el, { backgroundColor: bg })
-  const imgURL = canvas.toDataURL('image/png')
-
-  return imgURL
-}
-
 export {
   atttribute,
   text,
@@ -83,5 +75,4 @@ export {
   number,
   allNumbers,
   CSSProperties,
-  screenshot,
 }

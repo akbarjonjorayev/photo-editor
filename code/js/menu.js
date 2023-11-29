@@ -92,64 +92,14 @@ function changeFz(fz) {
 const searchInput = document.querySelector('.photo_search_input')
 
 async function searchPhoto() {
-  const val = searchInput.value
-  const https = `https://pixabay.com/api/?key=${appData.pixabayToken}&q=${val}&image_type=photo`
+  const val = searchInput.value.trim().split(' ').join('+')
+  const https = `https://pixabay.com/api/?key=${appData.token.searchPhoto}&q=${val}&image_type=photo`
 
   const promise = await fetch(https)
   const res = await promise.json()
 
   return res
 }
-
-const editArea = document.querySelector('.edit_area')
-
-function prepareToScreenshot(taken, els) {
-  if (!taken) {
-    editArea.style.borderColor = 'transparent'
-    editArea.style.borderRadius = '0'
-    
-    for (let i = 0; i < els.length; i++) {
-      els[i].classList.remove('active')
-    }
-  }
-
-  if (taken) {
-    editArea.style.borderColor = 'var(--pink-dark)'
-    editArea.style.borderRadius = 'var(--border-ra)'
-
-    for (let i = 0; i < els.length; i++) {
-      els[i].classList.add('active')
-    }
-  }
-}
-
-// async function download() {
-
-//   const canvas = await html2canvas1(editItem)
-//   const imgURL = canvas.toDataURL()
-
-//   console.log(imgURL)
-
-//   const link = document.createElement('a')
-//   link.href = imgURL
-//   link.download = 'photo-editor.png'
-//   link.click()
-
-//   // html2canvas(editItem, {})
-//   //   .then(function (canvas) {
-//   //     // It will return a canvas element
-//   //     let image = canvas.toDataURL('image/png', 0.5)
-//   //   })
-//   //   .catch((e) => {
-//   //     // Handle errors
-//   //     console.log(e)
-//   //   })
-
-//   for (let i = 0; i < editEls.length; i++) {
-//     editEls[i].classList.add('active')
-//   }
-
-// }
 
 export {
   recetColors,
@@ -158,5 +108,4 @@ export {
   changeBlur,
   changeFz,
   searchPhoto,
-  prepareToScreenshot,
 }
