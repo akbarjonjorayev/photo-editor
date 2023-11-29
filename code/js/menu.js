@@ -101,37 +101,55 @@ async function searchPhoto() {
   return res
 }
 
-const editItem = document.querySelector('.edit_item')
-async function download() {
-  const editEls = document.querySelectorAll('.edit_moving.active')
-  for (let i = 0; i < editEls.length; i++) {
-    editEls[i].classList.remove('active')
+const editArea = document.querySelector('.edit_area')
+
+function prepareToScreenshot(taken, els) {
+  if (!taken) {
+    editArea.style.borderColor = 'transparent'
+    editArea.style.borderRadius = '0'
+    
+    for (let i = 0; i < els.length; i++) {
+      els[i].classList.remove('active')
+    }
   }
 
-  html2canvas(editItem, {
-    allowTaint: true,
-    useCORS: true,
-  })
-    .then(function (canvas) {
-      // It will return a canvas element
-      let image = canvas.toDataURL('image/png', 0.5)
+  if (taken) {
+    editArea.style.borderColor = 'var(--pink-dark)'
+    editArea.style.borderRadius = 'var(--border-ra)'
 
-      const link = document.createElement('a')
-      link.href = image
-      link.download = 'photo-editor.png'
-      link.click()
-    })
-    .catch((e) => {
-      // Handle errors
-      console.log(e)
-    })
-
-  for (let i = 0; i < editEls.length; i++) {
-    editEls[i].classList.add('active')
+    for (let i = 0; i < els.length; i++) {
+      els[i].classList.add('active')
+    }
   }
-
-  Msg.show('Content downloaded', 'success')
 }
+
+// async function download() {
+
+//   const canvas = await html2canvas1(editItem)
+//   const imgURL = canvas.toDataURL()
+
+//   console.log(imgURL)
+
+//   const link = document.createElement('a')
+//   link.href = imgURL
+//   link.download = 'photo-editor.png'
+//   link.click()
+
+//   // html2canvas(editItem, {})
+//   //   .then(function (canvas) {
+//   //     // It will return a canvas element
+//   //     let image = canvas.toDataURL('image/png', 0.5)
+//   //   })
+//   //   .catch((e) => {
+//   //     // Handle errors
+//   //     console.log(e)
+//   //   })
+
+//   for (let i = 0; i < editEls.length; i++) {
+//     editEls[i].classList.add('active')
+//   }
+
+// }
 
 export {
   recetColors,
@@ -140,5 +158,5 @@ export {
   changeBlur,
   changeFz,
   searchPhoto,
-  download,
+  prepareToScreenshot,
 }

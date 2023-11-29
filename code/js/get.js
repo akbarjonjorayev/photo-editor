@@ -1,3 +1,5 @@
+import * as Msg from './msg.js'
+
 function atttribute(el, att) {
   if (!el) return false
 
@@ -66,4 +68,20 @@ function CSSProperties(cssString) {
   return { property, value }
 }
 
-export { atttribute, text, percent, number, allNumbers, CSSProperties }
+async function screenshot(el, { bg }) {
+  Msg.show('Screenshot is being prepared', 'warning')
+  const canvas = await html2canvas(el, { backgroundColor: bg })
+  const imgURL = canvas.toDataURL('image/png')
+
+  return imgURL
+}
+
+export {
+  atttribute,
+  text,
+  percent,
+  number,
+  allNumbers,
+  CSSProperties,
+  screenshot,
+}

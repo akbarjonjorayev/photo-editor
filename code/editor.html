@@ -11,10 +11,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script
-      src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
-      defer
-    ></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <!-- mine -->
     <script type="module" src="./js/main.js"></script>
     <link rel="stylesheet" href="editor.css" />
@@ -316,9 +314,11 @@
               <div class="upload_icon df_ai_jc_ce icon">Camera</div>
               <div class="color_txt">Take photo</div>
             </div>
-            <div class="upload_btn upload_btn_camera list_h df_ai_jc_ce w_100">
+            <div
+              class="upload_btn upload_btn_camera list_h df_ai_jc_ce w_100 download_btn"
+            >
               <div class="upload_icon df_ai_jc_ce icon">download</div>
-              <div class="color_txt download_btn">Download</div>
+              <div class="color_txt">Download</div>
             </div>
           </div>
         </div>
@@ -328,7 +328,10 @@
       </div>
       <div class="main_con edit_con">
         <div class="edit_item">
-          <div class="edit_el edit_el_background"></div>
+          <div
+            class="edit_el edit_el_background"
+            style="background-color: #fff"
+          ></div>
           <div class="edit_el hide">
             <div class="edit_photo_blur">
               <img src="" />

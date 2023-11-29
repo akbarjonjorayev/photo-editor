@@ -180,13 +180,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--border);
-  border-color: var(--pink-dark);
   border-width: 1px;
 }
 
 .edit_el_background {
   background-color: #fff;
+}
+
+.edit_area {
+  border: var(--border);
+  border-color: var(--pink-dark);
 }
 
 .upload_btn {

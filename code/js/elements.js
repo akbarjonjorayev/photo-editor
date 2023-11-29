@@ -1,4 +1,5 @@
 import * as Get from './get.js'
+import * as Msg from './msg.js'
 
 function getData(el) {
   if (!el) return false
@@ -94,4 +95,22 @@ function cursorPos(e, el) {
   return result
 }
 
-export { getData, setAnimation, setStyle, removeStyle, toggleStyle, cursorPos }
+function takeScreen(url) {
+  const link = document.createElement('a')
+
+  link.href = url
+  link.download = 'photo-editor.png'
+  link.click()
+
+  Msg.show('Screenshot downloaded', 'success')
+}
+
+export {
+  getData,
+  setAnimation,
+  setStyle,
+  removeStyle,
+  toggleStyle,
+  cursorPos,
+  takeScreen,
+}

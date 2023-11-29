@@ -341,9 +341,17 @@ searchBtn.onclick = async () => {
   allApp()
 }
 
+const editItem = document.querySelector('.edit_item')
+
 const dloadBtn = document.querySelector('.download_btn')
-dloadBtn.onclick = () => {
-  Menu.download()
+dloadBtn.onclick = async () => {
+  const editEls = document.querySelectorAll('.edit_moving.active')
+  Menu.prepareToScreenshot(false, editEls)
+
+  const screenURL = await Get.screenshot(editItem, { bg: '#ffffff' })
+  Elements.takeScreen(screenURL)
+
+  Menu.prepareToScreenshot(true, editEls)
 }
 
 function allApp() {
