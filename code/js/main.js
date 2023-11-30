@@ -13,6 +13,7 @@ import * as Menu from './menu.js'
 import * as Msg from './msg.js'
 import * as EditArea from './editArea.js'
 import * as Screenshot from './screenshot.js'
+import * as CopyPaste from './copypaste.js'
 
 const appData = Data.getData()
 
@@ -112,8 +113,9 @@ editElMoving.oncontextmenu = (e) => {
 
   if (editEl) {
     editEl.classList.remove('active')
-    Check.menuArea()
   }
+
+  Check.menuArea()
 }
 
 const contextMenuWins = document.querySelectorAll('.context_menu_win')
@@ -148,6 +150,24 @@ for (let i = 0; i < fillBtns.length; i++) {
   }
 }
 
+const copyBtn = document.querySelector('.copy_btn')
+copyBtn.onclick = () => {
+  const editEl = document.querySelector('.edit_moving.active')
+  const html = Get.text(editEl.innerHTML).trimmedText
+
+  CopyPaste.copy(html)
+}
+
+const editArea = document.querySelector('.edit_area')
+const pasteBtn = document.querySelector('.paste_btn')
+
+pasteBtn.onclick = async () => {
+  const txt = await CopyPaste.getText()
+
+  editArea.insertAdjacentHTML('beforeend', txt)
+  allApp()
+}
+
 const delBtn = document.querySelector('.edit_moving_menu_con .delete_btn')
 delBtn.onclick = () => {
   ContextFuncs.delEl()
@@ -169,10 +189,9 @@ window.oncontextmenu = (c) => {
     contextMenus[i].style.top = `${clientY}px`
   }
 
-  Check.contextMenus(contextMenus)
+  Check.contextMenus()
 }
 
-const editArea = document.querySelector('.edit_area')
 const cursorPos = document.querySelector('.cursor_pos')
 
 editArea.onmousemove = (m) => {

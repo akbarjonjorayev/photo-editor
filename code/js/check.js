@@ -1,13 +1,16 @@
 import * as Get from './get.js'
 import * as ShowHide from './showHide.js'
 import * as Elements from './elements.js'
+import * as CopyPaste from './copypaste.js'
 
 const movingMenuCon = document.querySelector('.edit_moving_menu_con')
 const wlMenuCon = document.querySelector('.wallpaper_menu_con')
 
 const editElWl = document.querySelector('.edit_el_wallpaper')
 
-function contextMenus(menus) {
+const menus = document.querySelectorAll('.context_menu_item')
+
+function contextMenus() {
   let menu, con
 
   for (let i = 0; i < menus.length; i++) {
@@ -40,7 +43,7 @@ function checkFillBtn(img, fillBtn) {
   }
 }
 
-function checkBtns(menu, con) {
+async function checkBtns(menu, con) {
   const editEl = document.querySelector('.edit_moving.active')
   const el = editEl.querySelector('.edit_moving_item').children[1]
   const elName = Get.text(el.tagName).lowerCase
@@ -70,6 +73,19 @@ function checkBtns(menu, con) {
     const img = editElWl.querySelector('img')
     const fillBtn = con.querySelector('.fill_btn')
     checkFillBtn(img, fillBtn)
+  }
+
+  // paste btn
+  const pasteBtn = document.querySelector('.paste_btn')
+
+  const txt = await CopyPaste.getText()
+  const html = isHTML(txt)
+
+  if (html) {
+    ShowHide.fullShowEl(pasteBtn)
+  }
+  if (!html) {
+    ShowHide.fullHideEl(pasteBtn)
   }
 }
 
@@ -182,4 +198,19 @@ function textBtns() {
   }
 }
 
-export { contextMenus, menuArea, rotateChilds, backgroundChilds, textBtns }
+function isHTML(txt) {
+  const doc = new DOMParser().parseFromString(txt, 'text/html')
+  const isHTML = Array.from(doc.body.childNodes).some(
+    (node) => node.nodeType === 1
+  )
+  return isHTML
+}
+
+export {
+  contextMenus,
+  menuArea,
+  rotateChilds,
+  backgroundChilds,
+  textBtns,
+  isHTML,
+}

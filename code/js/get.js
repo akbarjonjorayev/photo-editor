@@ -68,11 +68,25 @@ function CSSProperties(cssString) {
   return { property, value }
 }
 
-export {
-  atttribute,
-  text,
-  percent,
-  number,
-  allNumbers,
-  CSSProperties,
+function colorFromRGB(str) {
+  const rgbValues = allNumbers(str)
+
+  if (rgbValues.length !== 3) {
+    Msg.show('Invalid RGB string', 'error')
+    return
+  }
+
+  const [r, g, b] = rgbValues
+
+  const validR = Math.min(255, Math.max(0, r))
+  const validG = Math.min(255, Math.max(0, g))
+  const validB = Math.min(255, Math.max(0, b))
+
+  const hexR = validR.toString(16).padStart(2, '0')
+  const hexG = validG.toString(16).padStart(2, '0')
+  const hexB = validB.toString(16).padStart(2, '0')
+
+  return `#${hexR}${hexG}${hexB}`
 }
+
+export { atttribute, text, percent, number, allNumbers, CSSProperties, colorFromRGB }

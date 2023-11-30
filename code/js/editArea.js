@@ -34,9 +34,9 @@ function elsTxtBtnsCheck(el) {
     for (let i = 0; i < txtStyleBtns.length; i++) {
       ShowHide.hideEl(txtStyleBtns[i], 'active')
     }
-    
+
     fzInput.value = fzVal.innerText = 16
-    colorInput.value = '#000'
+    colorInput.value = '#000000'
   }
 
   for (let i = 0; i < txtStyleBtns.length; i++) {
@@ -63,9 +63,9 @@ function elsTxtBtnsCheck(el) {
 
   if (property.includes('color')) {
     const index = property.indexOf('color')
-    colorInput.value = value[index]
+    colorInput.value = Get.colorFromRGB(value[index])
   } else {
-    colorInput.value = style.color
+    colorInput.value = Get.colorFromRGB(style.color)
   }
 }
 
