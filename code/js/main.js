@@ -332,6 +332,7 @@ document.onkeydown = async (e) => {
   }
 
   if (key == 'Enter') {
+    e.preventDefault()
     if (document.activeElement == searchInput) {
       const APIRes = await Menu.searchPhoto()
       const photos = APIRes.hits
@@ -339,6 +340,15 @@ document.onkeydown = async (e) => {
       HTML.searchPhoto(photos)
       allApp()
     }
+  }
+
+  if (e.altKey && key == 'ArrowUp') {
+    e.preventDefault()
+    const menuItem = document.querySelectorAll(
+      '.menu_item:not(.hide):not(.main_menu)'
+    )
+
+    if (menuItem.length > 0) ShowHideClass.hideEl(menuItem[menuItem.length - 1])
   }
 }
 
@@ -383,6 +393,34 @@ dloadBtn.onclick = async () => {
   Screenshot.takeScreen(screenURL)
 
   Screenshot.prepareTo(true, editEls)
+}
+
+const mainFrameBtns = document.querySelectorAll('.h_max_con')
+for (let i = 0; i < mainFrameBtns.length; i++) {
+  mainFrameBtns[i].onclick = () => {
+    const style =
+      mainFrameBtns[i].querySelector('.shape_item div').style.aspectRatio
+    const txt = mainFrameBtns[i].querySelector('.choose_item_txt').innerText
+
+    if (Get.text(txt).lowerCase == 'full') {
+      editItem.style.aspectRatio = 'none'
+      editItem.classList.add('h_100', 'w_100')
+      return
+    }
+    editItem.style.aspectRatio = style
+    editItem.classList.remove('h_100', 'w_100')
+
+    const { width, height } = Elements.getData(editItem)
+    const arrSize = ['w_100', 'h_100']
+    const maxSize = Math.max(width, height)
+    const indexSize = [width, height].indexOf(maxSize)
+
+    if (arrSize[indexSize] == 'h_100') {
+      editItem.classList.add('w_100')
+    } else {
+      editItem.classList.add('h_100')
+    }
+  }
 }
 
 function allApp() {
